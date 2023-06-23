@@ -5,6 +5,8 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
+const timeout = 800;
+
 (function () {
   "use strict";
 
@@ -137,35 +139,38 @@
   /**
    * Hero type effect
    */
-  // const typed = select(".typed");
-  // if (typed) {
-  //   let typed_strings = typed.getAttribute("data-typed-items");
-  //   typed_strings = typed_strings.split(",");
-  //   new Typed(".typed", {
-  //     strings: typed_strings,
-  //     loop: true,
-  //     typeSpeed: 100,
-  //     backSpeed: 50,
-  //     backDelay: 2000,
-  //   });
-  // }
+  setTimeout(() => {
+    const typed = select(".typed");
+    if (typed) {
+      let typed_strings = typed.getAttribute("data-typed-items");
+      typed_strings = typed_strings.split(",");
+
+      new Typed(".typed", {
+        strings: typed_strings,
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 2000,
+      });
+    }
+  }, timeout);
 
   /**
    * Skills animation
    */
-  // let skilsContent = select(".skills-content");
-  // if (skilsContent) {
-  //   new Waypoint({
-  //     element: skilsContent,
-  //     offset: "80%",
-  //     handler: function (direction) {
-  //       let progress = select(".progress .progress-bar", true);
-  //       progress.forEach((el) => {
-  //         el.style.width = el.getAttribute("aria-valuenow") + "%";
-  //       });
-  //     },
-  //   });
-  // }
+  let skilsContent = select(".skills-content");
+  if (skilsContent) {
+    new Waypoint({
+      element: skilsContent,
+      offset: "80%",
+      handler: function (direction) {
+        let progress = select(".progress .progress-bar", true);
+        progress.forEach((el) => {
+          el.style.width = el.getAttribute("aria-valuenow") + "%";
+        });
+      },
+    });
+  }
 
   /**
    * Porfolio isotope and filter
@@ -204,70 +209,44 @@
   /**
    * Initiate portfolio lightbox
    */
-  // const portfolioLightbox = GLightbox({
-  //   selector: ".portfolio-lightbox",
-  // });
+  const portfolioLightbox = GLightbox({
+    selector: ".portfolio-lightbox",
+  });
 
   /**
    * Portfolio details slider
    */
-  // new Swiper(".portfolio-details-slider", {
-  //   speed: 400,
-  //   loop: true,
-  //   autoplay: {
-  //     delay: 5000,
-  //     disableOnInteraction: false,
-  //   },
-  //   pagination: {
-  //     el: ".swiper-pagination",
-  //     type: "bullets",
-  //     clickable: true,
-  //   },
-  // });
-
-  /**
-   * Testimonials slider
-   */
-  // new Swiper(".testimonials-slider", {
-  //   speed: 600,
-  //   loop: true,
-  //   autoplay: {
-  //     delay: 5000,
-  //     disableOnInteraction: false,
-  //   },
-  //   slidesPerView: "auto",
-  //   pagination: {
-  //     el: ".swiper-pagination",
-  //     type: "bullets",
-  //     clickable: true,
-  //   },
-  //   breakpoints: {
-  //     320: {
-  //       slidesPerView: 1,
-  //       spaceBetween: 20,
-  //     },
-
-  //     1200: {
-  //       slidesPerView: 3,
-  //       spaceBetween: 20,
-  //     },
-  //   },
-  // });
+  window.addEventListener("load", () => {
+    new Swiper(".portfolio-details-slider", {
+      speed: 400,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+    });
+  });
 
   /**
    * Animation on scroll
    */
-  // window.addEventListener("load", () => {
-  //   AOS.init({
-  //     duration: 1000,
-  //     easing: "ease-in-out",
-  //     once: true,
-  //     mirror: false,
-  //   });
-  // });
+  setTimeout(() => {
+    console.log("AOS init");
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false,
+    });
+  }, timeout);
 
   /**
    * Initiate Pure Counter
    */
-  // new PureCounter();
+  new PureCounter();
 })();

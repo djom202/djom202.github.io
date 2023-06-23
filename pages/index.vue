@@ -37,7 +37,7 @@ const contact = await useAsyncStoryblok('main/contact', { version: 'publish' })
 const seo = await useAsyncStoryblok('seo', { version: 'publish' })
 // const footer = await useAsyncStoryblok('footer', { version: 'publish' })
 
-const { AppleTouchIcon, Charset, Description, Favicon, Keywords, Robots, TitlePage, Viewport, Url, Image } = seo.value.content
+const { AppleTouchIcon, Charset, Description, ThemeColor, MsapplicationTileColor, SafariPinnedTab, FaviconIcon, Favicon16, Favicon32, Keywords, Robots, TitlePage, Viewport, Url, Image } = seo.value.content
 
 useHead({
   title: TitlePage ?? '',
@@ -51,6 +51,11 @@ useHead({
     },
     { name: "keywords", content: Keywords ?? '' },
     { name: "robots", content: Robots ?? '' },
+    { name: "cache-control", content: 'no-cache' },
+    { name: "pragma", content: 'no-cache' },
+    { name: "expires", content: '-1' },
+    { name: "msapplication-TileColor", content: MsapplicationTileColor },
+    { name: "theme-color", content: ThemeColor },
   ],
   htmlAttrs: {
     lang: "en",
@@ -58,10 +63,30 @@ useHead({
   link: [
     {
       rel: 'icon',
-      href: Favicon.filename ?? ''
+      type: 'image/x-icon',
+      href: FaviconIcon.filename ?? ''
+    },
+    {
+      rel: 'mask-icon',
+      color: '#5bbad5',
+      href: SafariPinnedTab.filename ?? ''
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: Favicon16.filename ?? ''
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: Favicon32.filename ?? ''
     },
     {
       rel: 'apple-touch-icon',
+      type: 'image/png',
+      sizes: '180x180',
       href: AppleTouchIcon.filename ?? ''
     }
   ]

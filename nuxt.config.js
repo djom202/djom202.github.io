@@ -1,53 +1,57 @@
+const scriptPath =
+  process.env.NODE_ENV === "production"
+    ? []
+    : [
+        {
+          src: `_nuxt/assets/vendor/purecounter/purecounter_vanilla.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/vendor/aos/aos.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/vendor/glightbox/js/glightbox.min.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/vendor/isotope-layout/isotope.pkgd.min.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/vendor/swiper/swiper-bundle.min.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/vendor/typed/typed.umd.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/vendor/waypoints/noframework.waypoints.js`,
+          body: true,
+        },
+        {
+          src: `_nuxt/assets/js/main.js`,
+          body: true,
+        },
+      ];
+
 export default defineNuxtConfig({
   ssr: false,
   target: "static",
   css: [
-    // "@/node_modules/aos/dist/aos.css",
     "@/node_modules/bootstrap/dist/css/bootstrap.min.css",
     "@/node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
     "@/node_modules/boxicons/css/boxicons.min.css",
-    // "@/node_modules/glightbox/dist/css/glightbox.min.css",
-    // "@/node_modules/swiper/swiper-bundle.min.css",
-    "@/assets/css/style.css",
+    "@/assets/vendor/glightbox/css/glightbox.min.css",
+    "@/assets/vendor/swiper/swiper-bundle.min.css",
+    "@/assets/vendor/aos/aos.css",
+    "@/assets/css/style.min.css",
   ],
   app: {
     baseURL: process.env.BASEURL,
     head: {
-      script: [
-        {
-          src: "_nuxt/node_modules/@srexi/purecounterjs/dist/purecounter_vanilla.js",
-          body: true,
-        },
-        // {
-        //   src: "_nuxt/node_modules/aos/dist/aos.js",
-        //   body: true,
-        // },
-        // {
-        //   src: "_nuxt/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-        //   body: true,
-        // },
-        // {
-        //   src: "_nuxt/node_modules/glightbox/dist/js/glightbox.min.js",
-        //   body: true,
-        // },
-        {
-          src: "_nuxt/node_modules/isotope-layout/dist/isotope.pkgd.min.js",
-          body: true,
-        },
-        // {
-        //   src: "_nuxt/node_modules/swiper/swiper-bundle.min.js",
-        //   body: true,
-        // },
-        // {
-        //   src: "_nuxt/node_modules/typed.js/dist/typed.umd.js",
-        //   body: true,
-        // },
-        {
-          src: "_nuxt/node_modules/waypoints/lib/noframework.waypoints.min.js",
-          body: true,
-        },
-        { src: "_nuxt/assets/js/main.js", body: true },
-      ],
+      script: scriptPath,
     },
   },
   modules: [
@@ -56,7 +60,7 @@ export default defineNuxtConfig({
       {
         accessToken: process.env.ACCESSTOKEN,
         apiOptions: {
-          region: "us", // Set 'US" if your space is created in US region (EU default)
+          region: process.env.REGION, // Set 'US" if your space is created in US region (EU default)
         },
       },
       [
@@ -109,5 +113,4 @@ export default defineNuxtConfig({
       },
     },
   },
-  // plugins: [{ src: "~/plugins/aos", mode: "client", ssr: false }],
 });

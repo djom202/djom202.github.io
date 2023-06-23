@@ -19,8 +19,9 @@
                 </div>
             </div>
 
-            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-                <StoryblokComponent v-for="bk in blok.Projects" :key="bk._uid" :blok="bk" />
+            <div class="row portfolio-container">
+                <StoryblokComponent v-for="(bk, idx) in blok.Projects" :key="bk._uid" :blok="bk" data-aos="fade-up"
+                    :data-aos-delay="idx * 100" />
             </div>
 
         </div>
