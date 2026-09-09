@@ -10,9 +10,11 @@
 
             <div class="row" data-aos="fade-up">
                 <div class="col-lg-12 d-flex justify-content-center">
-                    <ul id="portfolio-flters">
-                        <li v-for="(filter, idx) in blok.Filters" :data-filter="filter.By"
-                            :class="{ 'filter-active': idx === 0 }">
+                    <ul id="portfolio-flters" role="tablist">
+                        <li v-for="filter in blok.Filters" :key="filter._uid || filter.By"
+                            :class="{ 'filter-active': activeFilter === normalizeFilter(filter.By) }"
+                            role="tab" :aria-selected="activeFilter === normalizeFilter(filter.By)"
+                            @click="activeFilter = normalizeFilter(filter.By)">
                             {{ filter.Text }}
                         </li>
                     </ul>
@@ -20,7 +22,7 @@
             </div>
 
             <div class="row portfolio-container">
-                <StoryblokComponent v-for="(bk, idx) in blok.Projects" :key="bk._uid" :blok="bk" data-aos="fade-up"
+                <StoryblokComponent v-for="(bk, idx) in filteredProjects" :key="bk._uid" :blok="bk" data-aos="fade-up"
                     :data-aos-delay="idx * 100" />
             </div>
 
@@ -29,5 +31,18 @@
 </template>
 
 <script setup>
-defineProps({ blok: Object });
+const props = defineProps({ blok: Object });
+const normalizeFilter = (value = '') => {
+    const normalized = String(value).replace(/^\./, '').trim().toLowerCase();
+    return normalized === '*' || normalized === 'all' ? '*' : normalized;
+};
+const activeFilter = ref(normalizeFilter(props.blok?.Filters?.[0]?.By || '*'));
+const filteredProjects = computed(() => {
+    if (activeFilter.value === '*') return props.blok?.Projects || [];
+
+    return (props.blok?.Projects || []).filter((project) => {
+        const filters = String(project.filterBy || '').split(/[ ,]+/).filter(Boolean);
+        return filters.map(normalizeFilter).includes(activeFilter.value);
+    });
+});
 </script>

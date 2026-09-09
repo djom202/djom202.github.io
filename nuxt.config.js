@@ -46,7 +46,7 @@ export default defineNuxtConfig({
     "@/assets/vendor/glightbox/css/glightbox.min.css",
     "@/assets/vendor/swiper/swiper-bundle.min.css",
     "@/assets/vendor/aos/aos.css",
-    "@/assets/css/style.min.css",
+    "@/assets/css/style.css",
   ],
   app: {
     baseURL: process.env.BASEURL,
