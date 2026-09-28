@@ -1,55 +1,58 @@
+const baseURL = process.env.BASEURL || "/";
+const normalizedBase = baseURL.endsWith("/") ? baseURL : `${baseURL}/`;
+const withBase = (p) => `${normalizedBase}${p}`.replace(/\/+/g, "/");
+
 const scriptPath =
   process.env.NODE_ENV === "production"
     ? []
     : [
         {
-          src: `_nuxt/assets/vendor/purecounter/purecounter_vanilla.js`,
+          src: withBase(`_nuxt/assets/vendor/purecounter/purecounter_vanilla.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/vendor/aos/aos.js`,
+          src: withBase(`_nuxt/assets/vendor/aos/aos.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/vendor/glightbox/js/glightbox.min.js`,
+          src: withBase(`_nuxt/assets/vendor/glightbox/js/glightbox.min.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/vendor/isotope-layout/isotope.pkgd.min.js`,
+          src: withBase(`_nuxt/assets/vendor/isotope-layout/isotope.pkgd.min.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/vendor/swiper/swiper-bundle.min.js`,
+          src: withBase(`_nuxt/assets/vendor/swiper/swiper-bundle.min.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/vendor/typed/typed.umd.js`,
+          src: withBase(`_nuxt/assets/vendor/typed/typed.umd.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/vendor/waypoints/noframework.waypoints.js`,
+          src: withBase(`_nuxt/assets/vendor/waypoints/noframework.waypoints.js`),
           body: true,
         },
         {
-          src: `_nuxt/assets/js/main.js`,
+          src: withBase(`_nuxt/assets/js/main.js`),
           body: true,
         },
       ];
 
 export default defineNuxtConfig({
   ssr: false,
-  target: "static",
   css: [
-    "@/node_modules/bootstrap/dist/css/bootstrap.min.css",
-    "@/node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
-    "@/node_modules/boxicons/css/boxicons.min.css",
+    "bootstrap/dist/css/bootstrap.min.css",
+    "bootstrap-icons/font/bootstrap-icons.min.css",
+    "boxicons/css/boxicons.min.css",
     "@/assets/vendor/glightbox/css/glightbox.min.css",
     "@/assets/vendor/swiper/swiper-bundle.min.css",
     "@/assets/vendor/aos/aos.css",
     "@/assets/css/style.css",
   ],
   app: {
-    baseURL: process.env.BASEURL,
+    baseURL,
     head: {
       script: scriptPath,
     },
@@ -58,43 +61,44 @@ export default defineNuxtConfig({
     [
       "@storyblok/nuxt",
       {
-        accessToken: process.env.ACCESSTOKEN,
+        accessToken: process.env.ACCESSTOKEN || "",
         apiOptions: {
-          region: process.env.REGION, // Set 'US" if your space is created in US region (EU default)
+          region: process.env.REGION || "EU",
         },
       },
-      [
-        "@nuxtjs/robots",
-        {
-          UserAgent: "*",
-          Disallow: "",
-        },
-      ],
-      "@nuxtjs/sitemap",
-      "@nuxtjs/axios",
     ],
+    "@nuxtjs/robots",
     "@nuxtjs/tailwindcss",
+    "@nuxtjs/google-fonts",
     [
       "nuxt-mail",
       {
         message: {
-          to: process.env.SMPT_MESSAGE_TO,
+          to: process.env.SMPT_MESSAGE_TO || "",
         },
         smtp: {
-          host: process.env.SMPT_HOST,
-          port: process.env.SMPT_PORT,
+          host: process.env.SMPT_HOST || "localhost",
+          port: Number(process.env.SMPT_PORT) || 1025,
           auth: {
-            user: process.env.SMPT_MESSAGE_TO,
-            pass: process.env.SMPT_PASSWORD,
+            user: process.env.SMPT_MESSAGE_TO || "",
+            pass: process.env.SMPT_PASSWORD || "",
           },
         },
       },
     ],
   ],
+  robots: {
+    rules: {
+      UserAgent: "*",
+      Disallow: "",
+    },
+  },
   vite: {
     optimizeDeps: { exclude: ["fsevents"] },
   },
-  buildModules: ["@nuxtjs/google-fonts"],
+  nitro: {
+    preset: "github-pages",
+  },
   googleFonts: {
     preconnect: true,
     useStylesheet: true,

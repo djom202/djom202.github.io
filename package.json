@@ -5,16 +5,20 @@
     "name": "Jonathan Olier Miranda",
     "email": "djom202@gmail.com"
   },
+  "engines": {
+    "node": ">=18.0.0 <23.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
-    "build": "nuxt build --standalone",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "dev-ssl": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "stackblitz": "npm run dev",
     "deploy": "NODE_DEBUG=gh-pages gh-pages --dotfiles -d .output/public",
-    "pages": "npm run build && npm run generate && npm run deploy",
-    "clean": "rimraf .output dist"
+    "pages": "npm run generate && npm run deploy",
+    "clean": "rimraf .output dist .nuxt"
   },
   "stackblitz": {
     "startCommand": "npm run stackblitz"
@@ -27,10 +31,8 @@
     "rimraf": "^5.0.1"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/google-fonts": "^3.0.1",
     "@nuxtjs/robots": "^3.0.0",
-    "@nuxtjs/sitemap": "^2.4.0",
     "@srexi/purecounterjs": "^1.5.0",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.0",
