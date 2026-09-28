@@ -2,43 +2,27 @@ const baseURL = process.env.BASEURL || "/";
 const normalizedBase = baseURL.endsWith("/") ? baseURL : `${baseURL}/`;
 const withBase = (p) => `${normalizedBase}${p}`.replace(/\/+/g, "/");
 
-const scriptPath =
-  process.env.NODE_ENV === "production"
-    ? []
-    : [
-        {
-          src: withBase(`_nuxt/assets/vendor/purecounter/purecounter_vanilla.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/vendor/aos/aos.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/vendor/glightbox/js/glightbox.min.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/vendor/isotope-layout/isotope.pkgd.min.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/vendor/swiper/swiper-bundle.min.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/vendor/typed/typed.umd.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/vendor/waypoints/noframework.waypoints.js`),
-          body: true,
-        },
-        {
-          src: withBase(`_nuxt/assets/js/main.js`),
-          body: true,
-        },
-      ];
+// Vendor + template JS served from public/vendor, so they resolve
+// identically in dev and in the static production output
+// (raw files under assets/ are NOT copied to .output/public).
+const vendorScripts = [
+  `vendor/purecounter/purecounter_vanilla.js`,
+  `vendor/aos/aos.js`,
+  `vendor/glightbox/js/glightbox.min.js`,
+  `vendor/isotope-layout/isotope.pkgd.min.js`,
+  `vendor/swiper/swiper-bundle.min.js`,
+  `vendor/typed/typed.umd.js`,
+  `vendor/waypoints/noframework.waypoints.js`,
+  `vendor/js/main.js`,
+];
+
+const scriptPath = vendorScripts.map((src) => ({
+  src: withBase(src),
+  // Head + defer: Nuxt 3.5 drops body-positioned app.head scripts from the
+  // ssr:false shell, and headTags ARE rendered. defer keeps the original
+  // end-of-body execution order (DOM ready, sequential).
+  defer: true,
+}));
 
 export default defineNuxtConfig({
   ssr: false,
@@ -63,7 +47,8 @@ export default defineNuxtConfig({
       {
         accessToken: process.env.ACCESSTOKEN || "",
         apiOptions: {
-          region: process.env.REGION || "EU",
+          // storyblok-js-client only accepts lowercase: "eu" | "us" | "cn"
+          region: (process.env.REGION || "eu").toLowerCase(),
         },
       },
     ],

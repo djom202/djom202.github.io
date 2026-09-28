@@ -46,7 +46,7 @@
                             <div v-show="isSend" class="sent-message">Your message has been sent. Thank you!</div>
                         </div>
                         <div class="text-center">
-                            <button @click.prevent="sendMessage">Send Message</button>
+                            <button type="submit" @click.prevent="sendMessage">Send Message</button>
                         </div>
                     </form>
                 </div>

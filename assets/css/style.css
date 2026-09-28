@@ -1491,3 +1491,39 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/*--------------------------------------------------------------
+# Mobile hardening
+--------------------------------------------------------------*/
+body {
+  overflow-x: clip;
+}
+
+#hero {
+  height: 100vh;
+  height: 100svh;
+}
+
+#hero .hero-container {
+  min-width: 0;
+}
+
+.about table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.about table td {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 576px) {
+  .about table td:first-child {
+    width: 110px;
+  }
+
+  .contact .info,
+  .contact .php-email-form {
+    padding: 24px;
+  }
+}

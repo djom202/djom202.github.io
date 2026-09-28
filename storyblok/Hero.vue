@@ -1,7 +1,7 @@
 <template>
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex flex-column justify-content-center align-items-center" v-editable="blok" v-bind:style="{
-        background: 'url(' + blok.Background.filename + ') top center/cover fixed'
+        background: 'url(' + blok.Background.filename + ') top center/cover'
     }">
         <div class="hero-container" data-aos="fade-in">
             <h1>{{ blok.AuthorName }}</h1>
