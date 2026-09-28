@@ -1,0 +1,223 @@
+// Technical skills grouped as in the CV, replacing the previous flat CMS list.
+// Progress values (0-100) are read from the expertise bars.
+// Each item carries component: "Skill" so StoryblokComponent can resolve it,
+// reusing the exact same Skill card look.
+const s = (Text, Progress) => ({ Text, Progress, component: "Skill" });
+
+export const skillGroups = [
+  {
+    title: "E2E Testing",
+    items: [
+      s("Protractor", 100),
+      s("Selenium", 85),
+      s("Cypress", 80),
+      s("WebdriverIO", 80),
+      s("Puppeteer", 70),
+      s("Appium", 60),
+      s("Nightmare", 15),
+    ],
+  },
+  {
+    title: "Automation",
+    items: [
+      s("SuperTest", 100),
+      s("Gherkin", 100),
+      s("Cucumber", 85),
+      s("Jest", 85),
+      s("Mocha", 85),
+      s("Chai", 85),
+      s("Behave", 85),
+      s("Pytest", 85),
+      s("Karma", 70),
+      s("Jasmine", 65),
+      s("ScalaTest", 40),
+      s("TestNG", 15),
+      s("RSpec", 15),
+    ],
+  },
+  {
+    title: "QA Tools",
+    items: [
+      s("Postman", 100),
+      s("TestRail", 100),
+      s("Jira", 85),
+      s("Katalon", 40),
+      s("JMeter", 15),
+    ],
+  },
+  {
+    title: "Cloud",
+    items: [
+      s("Docker", 100),
+      s("AWS", 85),
+      s("Jenkins", 85),
+      s("BrowserStack", 85),
+      s("SauceLabs", 85),
+      s("Kubernetes", 85),
+      s("CircleCI", 85),
+      s("Codeship", 85),
+      s("GitLab CI/CD", 85),
+      s("Bitbucket Pipelines", 85),
+      s("AWS CodePipeline", 85),
+      s("Kafka", 60),
+      s("GCP", 55),
+      s("GitHub Actions", 40),
+    ],
+  },
+  {
+    title: "Methodologies",
+    items: [
+      s("Agile", 75),
+      s("Scrum", 75),
+    ],
+  },
+  {
+    title: "Monitoring",
+    items: [
+      s("Grafana", 65),
+      s("Datadog", 65),
+      s("Splunk", 65),
+    ],
+  },
+  {
+    title: "Backend Frameworks",
+    items: [
+      s("Slim", 100),
+      s("ExpressJs", 80),
+      s("Ruby on Rails", 65),
+      s("Django", 55),
+    ],
+  },
+  {
+    title: "Frontend Frameworks",
+    items: [
+      s("VueJs", 100),
+      s("Bootstrap", 100),
+      s("NuxtJs", 45),
+      s("AngularJs", 40),
+      s("ReactJs", 15),
+      s("Tailwind", 15),
+    ],
+  },
+  {
+    title: "Mobile Frameworks",
+    items: [
+      s("React Native", 80),
+      s("NativeScript", 80),
+      s("Corona", 70),
+      s("Godot", 50),
+    ],
+  },
+  {
+    title: "CMS",
+    items: [
+      s("Wordpress", 100),
+      s("ContentStack", 80),
+      s("Strapi", 80),
+      s("StoryBlock", 60),
+      s("Django CMS", 12),
+    ],
+  },
+  {
+    title: "Design Tools",
+    items: [
+      s("Illustrator", 80),
+      s("Sketch", 80),
+      s("Figma", 80),
+      s("Photoshop", 65),
+      s("CorelDraw", 60),
+    ],
+  },
+  {
+    title: "IDE's",
+    items: [
+      s("VsCode", 100),
+      s("Sublime Text", 100),
+      s("IntelliJ", 85),
+      s("Amplify Studio", 85),
+      s("Android Studio", 85),
+      s("Eclipse", 85),
+      s("Xcode", 70),
+      s("Atom", 70),
+      s("Visual Studio", 65),
+    ],
+  },
+  {
+    title: "Databases - NoSQL",
+    items: [
+      s("DynamoDB", 75),
+      s("IndexedDB", 75),
+      s("Firebase", 65),
+      s("SQLite", 65),
+      s("MongoDB", 65),
+      s("Redis", 10),
+    ],
+  },
+  {
+    title: "Databases - SQL",
+    items: [
+      s("Oracle", 12),
+      s("PostgreSql", 55),
+      s("MySQL", 55),
+      s("Amazon RDS", 12),
+      s("MariaDB", 12),
+    ],
+  },
+  {
+    title: "Databases Tools",
+    items: [
+      s("phpMyAdmin", 100),
+      s("PgAdmin", 100),
+      s("MySQLWorkbench", 100),
+    ],
+  },
+  {
+    title: "Languages - General-purpose",
+    items: [
+      s("Javascript", 100),
+      s("Php", 90),
+      s("Python", 70),
+      s("Typescript", 60),
+      s("Kotlin", 60),
+      s("Groovy", 60),
+      s("Java", 60),
+      s("R", 25),
+      s("Go", 40),
+      s("Lua", 12),
+      s("Scala", 12),
+      s("Elixir", 12),
+      s("Dart", 12),
+      s("LaTeX", 12),
+    ],
+  },
+  {
+    title: "Languages - Domain-specific",
+    items: [
+      s("VBScript", 60),
+      s("VB.Net", 55),
+      s("Latex", 25),
+      s("GDscript", 25),
+      s("GameMaker", 25),
+      s("Solidity", 25),
+    ],
+  },
+  {
+    title: "Engineering",
+    items: [
+      s("Api Services", 90),
+      s("Rest", 90),
+      s("Xml", 90),
+      s("Css", 90),
+      s("Html", 90),
+      s("Sass", 90),
+      s("Json", 90),
+      s("Git", 90),
+      s("Responsive Design", 90),
+      s("Mobile First", 85),
+      s("Soap", 70),
+      s("Ftp/Sftp", 65),
+      s("Tcp/Ip", 50),
+      s("Arduino", 30),
+    ],
+  },
+];

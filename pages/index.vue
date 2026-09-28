@@ -98,4 +98,15 @@ useSeoMeta({
   ogImage: Image.filename ?? '',
   ogUrl: Url ?? ''
 })
+
+// Sections render after the async Storyblok fetch, while vendor scripts
+// (AOS) initialize at page load. Refresh AOS once mounted so scroll
+// animations attach to the rendered content.
+onMounted(() => {
+  nextTick(() => {
+    if (typeof window !== 'undefined' && window.AOS?.refresh) {
+      window.AOS.refresh()
+    }
+  })
+})
 </script>

@@ -19,7 +19,7 @@
       <nav id="navbar" class="nav-menu navbar">
         <ul>
           <li v-for="item in blok.MenuItems">
-            <a :href="item.href" class="nav-link scrollto active">
+            <a :href="item.href" class="nav-link scrollto active" @click="closeMobileNav">
               <i :class="item.class"></i>
               <span>{{ item.text }}</span>
             </a>
@@ -32,4 +32,13 @@
 
 <script setup>
 defineProps({ blok: Object });
+
+// main.js binds .scrollto clicks at load time, before the async Storyblok
+// menu exists, so close the mobile drawer from here where it always runs.
+function closeMobileNav() {
+  document.body.classList.remove('mobile-nav-active');
+  const toggle = document.querySelector('.mobile-nav-toggle');
+  toggle?.classList.add('bi-list');
+  toggle?.classList.remove('bi-x');
+}
 </script>
