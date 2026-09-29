@@ -43,6 +43,8 @@
                         </div>
                         <div class="my-3">
                             <div v-show="hasError" class="error-message">Fill all the fields</div>
+                            <div v-show="sendError" class="error-message">Could not send your message. Please try
+                                again later.</div>
                             <div v-show="isSend" class="sent-message">Your message has been sent. Thank you!</div>
                         </div>
                         <div class="text-center">
@@ -65,6 +67,7 @@ const subject = ref('')
 const text = ref('')
 const isSend = ref(false)
 const hasError = ref(false)
+const sendError = ref(false)
 
 function validateFields() {
     if (name.value === '' || from.value === '' || subject.value === '' || text.value === '') return false
@@ -80,11 +83,14 @@ function setAction(obj) {
     }, 3000)
 }
 
-function sendMessage() {
-    if (validateFields()) {
-        const mail = useMail()
+async function sendMessage() {
+    if (!validateFields()) {
+        setAction(hasError)
+        return
+    }
 
-        mail.send({
+    try {
+        await useMail().send({
             from: from.value,
             subject: subject.value,
             text: text.value,
@@ -94,9 +100,13 @@ function sendMessage() {
             }
         })
 
+        name.value = ''
+        from.value = ''
+        subject.value = ''
+        text.value = ''
         setAction(isSend)
-    } else {
-        setAction(hasError)
+    } catch (e) {
+        setAction(sendError)
     }
 }
 </script>

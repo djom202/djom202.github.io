@@ -160,11 +160,10 @@ const timeout = 800;
   }
 
   /**
-   * Initiate portfolio lightbox
+   * Portfolio lightbox is initialized in storyblok/Portfolio.vue,
+   * after the Storyblok projects are available. (Initializing here
+   * would run before Vue mounts and find no .portfolio-lightbox elements.)
    */
-  const portfolioLightbox = GLightbox({
-    selector: ".portfolio-lightbox",
-  });
 
   /**
    * Portfolio details slider

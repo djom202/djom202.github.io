@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">{{ blok.SubTitle }}</h3>
-                    <StoryblokComponent v-for="bk in blok.List" :key="bk._uid" :blok="bk" />
+                    <StoryblokComponent v-for="bk in visibleJobs" :key="bk._uid" :blok="bk" />
                 </div>
             </div>
 
@@ -20,5 +20,10 @@
 </template>
 
 <script setup>
-defineProps({ blok: Object });
+const props = defineProps({ blok: Object });
+
+// Only jobs explicitly flagged in the CMS. Missing flag = visible.
+const visibleJobs = computed(() => {
+    return (props.blok?.List || []).filter((job) => job?.Enabled !== false);
+});
 </script>

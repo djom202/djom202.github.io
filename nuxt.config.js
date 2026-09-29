@@ -38,6 +38,27 @@ export default defineNuxtConfig({
   app: {
     baseURL,
     head: {
+      // Static mirror of the Storyblok "seo" story so crawlers (no JS)
+      // see title/meta/OG tags. If you edit them in the CMS, update here too.
+      // (pages/index.vue useHead overrides these client-side after hydration.)
+      title: "Jonathan Page",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "description", content: "my website description" },
+        { name: "keywords", content: "My, amazing, site" },
+        { name: "robots", content: "index, follow" },
+        { property: "og:type", content: "website" },
+        { property: "og:title", content: "Jonathan Page" },
+        { property: "og:description", content: "my website description" },
+        { property: "og:url", content: "https://djom202.github.io/" },
+        {
+          property: "og:image",
+          content:
+            "https://a-us.storyblok.com/f/1014708/180x180/85718a9e0e/apple-touch-icon.png",
+        },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
       script: scriptPath,
     },
   },

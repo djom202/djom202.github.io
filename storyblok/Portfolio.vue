@@ -13,8 +13,10 @@
                     <ul id="portfolio-flters" role="tablist">
                         <li v-for="filter in visibleFilters" :key="filter._uid || filter.By"
                             :class="{ 'filter-active': activeFilter === normalizeFilter(filter.By) }"
-                            role="tab" :aria-selected="activeFilter === normalizeFilter(filter.By)"
-                            @click="activeFilter = normalizeFilter(filter.By)">
+                            role="tab" tabindex="0" :aria-selected="activeFilter === normalizeFilter(filter.By)"
+                            @click="activeFilter = normalizeFilter(filter.By)"
+                            @keydown.enter="activeFilter = normalizeFilter(filter.By)"
+                            @keydown.space.prevent="activeFilter = normalizeFilter(filter.By)">
                             {{ filter.Text }}
                         </li>
                     </ul>
@@ -34,6 +36,8 @@
 </template>
 
 <script setup>
+import GLightbox from "glightbox";
+
 const props = defineProps({ blok: Object });
 const normalizeFilter = (value = '') => {
     const normalized = String(value).replace(/^\./, '').trim().toLowerCase();
@@ -56,4 +60,13 @@ const visibleFilters = computed(() => {
         return (props.blok?.Projects || []).some((project) => matchesFilter(project, normalized));
     });
 });
+// GLightbox is owned here (not in main.js): items render after the async
+// Storyblok fetch, so initializing at page load would find no elements.
+let lightbox = null;
+onMounted(() => {
+    nextTick(() => {
+        lightbox = GLightbox({ selector: ".portfolio-lightbox" });
+    });
+});
+onBeforeUnmount(() => lightbox?.destroy());
 </script>

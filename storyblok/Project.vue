@@ -5,10 +5,7 @@
             <div class="portfolio-links">
                 <a :href="blok.Image.filename" data-gallery="portfolioGallery" class="portfolio-lightbox"
                     :title="blok.Title">
-                    <i class="bx bx-plus"></i>
-                </a>
-                <a href="portfolio-details.html" :title="blok.HelpText">
-                    <i class="bx bx-link"></i>
+                    <i class="bx bx-search"></i>
                 </a>
             </div>
         </div>

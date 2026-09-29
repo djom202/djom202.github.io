@@ -11,8 +11,10 @@
                     <ul class="skills-tabs" role="tablist">
                         <li v-for="group in skillGroups" :key="group.title"
                             :class="{ 'filter-active': activeGroup === group.title }"
-                            role="tab" :aria-selected="activeGroup === group.title"
-                            @click="activeGroup = group.title">
+                            role="tab" tabindex="0" :aria-selected="activeGroup === group.title"
+                            @click="activeGroup = group.title"
+                            @keydown.enter="activeGroup = group.title"
+                            @keydown.space.prevent="activeGroup = group.title">
                             {{ group.title }}
                         </li>
                     </ul>

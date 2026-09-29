@@ -565,11 +565,90 @@ section {
   margin-bottom: 0;
 }
 
+.resume .resume-job-body .work-mode {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.resume .resume-projects {
+  margin-top: 16px;
+  display: grid;
+  gap: 14px;
+}
+
+.resume .resume-projects-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+.resume .resume-project {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.resume .resume-project > a {
+  flex-shrink: 0;
+  display: block;
+  line-height: 0;
+}
+
+.resume .resume-project img {
+  width: 252px;
+  height: 189px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.resume .resume-project h6 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #050d18;
+}
+
+.resume .resume-project p {
+  font-size: 14px;
+  margin: 0;
+  color: #173b6c;
+}
+
+@media (max-width: 576px) {
+  .resume .resume-project {
+    flex-direction: column;
+  }
+
+  .resume .resume-project img {
+    width: 180px;
+    height: 135px;
+  }
+}
+
 .resume .resume-job-body ul {
   margin-top: 12px;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
+}
+
+.resume .resume-job-body li {
+  position: relative;
+  padding-left: 1.1em;
+}
+
+.resume .resume-job-body li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .resume .company-logo {
@@ -677,6 +756,10 @@ section {
 
 .portfolio .portfolio-wrap .portfolio-links a + a {
   border-left: 1px solid #37b3ed;
+}
+
+.portfolio .portfolio-wrap .portfolio-links a:only-child {
+  width: 100%;
 }
 
 .portfolio .portfolio-wrap:hover::before {
@@ -802,6 +885,7 @@ section {
   font-weight: 700;
   margin-bottom: 15px;
   font-size: 18px;
+  color: #343a40;
 }
 
 .services .title a {
@@ -1610,6 +1694,12 @@ body {
 .skills-tabs li.filter-active {
   color: var(--ink);
   background: var(--lime);
+}
+
+.skills-tabs li:focus-visible,
+.portfolio #portfolio-flters li:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 576px) {
