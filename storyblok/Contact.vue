@@ -54,6 +54,11 @@
                 </div>
             </div>
 
+            <div class="text-center mt-4">
+                <img src="https://visitor-badge.laobi.icu/badge?page_id=djom202.github.io"
+                    alt="Total visits" loading="lazy">
+            </div>
+
         </div>
     </section><!-- End Contact Section -->
 </template>

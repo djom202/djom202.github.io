@@ -16,13 +16,22 @@ const vendorScripts = [
   `vendor/js/main.js`,
 ];
 
-const scriptPath = vendorScripts.map((src) => ({
-  src: withBase(src),
-  // Head + defer: Nuxt 3.5 drops body-positioned app.head scripts from the
-  // ssr:false shell, and headTags ARE rendered. defer keeps the original
-  // end-of-body execution order (DOM ready, sequential).
-  defer: true,
-}));
+const scriptPath = [
+  ...vendorScripts.map((src) => ({
+    src: withBase(src),
+    defer: true,
+  })),
+  // Umami analytics, production only (keep local dev traffic out of metrics).
+  ...(process.env.NODE_ENV === "production"
+    ? [
+        {
+          src: "https://umami.cristalbirds.com/script.js",
+          defer: true,
+          "data-website-id": "d74e1e00-2182-45df-a48e-b99e09c8dcc2",
+        },
+      ]
+    : []),
+];
 
 export default defineNuxtConfig({
   ssr: false,

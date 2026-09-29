@@ -573,16 +573,18 @@ section {
 .resume .resume-projects {
   margin-top: 16px;
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
 
 .resume .resume-projects-label {
+  grid-column: 1 / -1;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0;
+  margin: 0 0 12px;
 }
 
 .resume .resume-project {
@@ -621,6 +623,10 @@ section {
 }
 
 @media (max-width: 576px) {
+  .resume .resume-projects {
+    grid-template-columns: 1fr;
+  }
+
   .resume .resume-project {
     flex-direction: column;
   }
