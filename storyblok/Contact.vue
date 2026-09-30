@@ -94,15 +94,36 @@ async function sendMessage() {
         return
     }
 
-    try {
-        await useMail().send({
+    // Static hosting has no mail server: the form posts to a Cloudflare
+    // Worker (CONTACT_API_URL) that relays via Resend with a secret key.
+    // Without an endpoint (local dev) it only simulates: waits, logs and
+    // shows success without sending anything.
+    const endpoint = useRuntimeConfig().public.contactApiUrl
+    if (!endpoint) {
+        await new Promise((resolve) => setTimeout(resolve, 600))
+        console.info("[contact] dev mock: message not sent", {
+            name: name.value,
             from: from.value,
             subject: subject.value,
-            text: text.value,
-            sender: {
+        })
+
+        name.value = ''
+        from.value = ''
+        subject.value = ''
+        text.value = ''
+        setAction(isSend)
+        return
+    }
+
+    try {
+        await $fetch(endpoint, {
+            method: "POST",
+            body: {
                 name: name.value,
-                email: from.value
-            }
+                from: from.value,
+                subject: subject.value,
+                text: text.value,
+            },
         })
 
         name.value = ''

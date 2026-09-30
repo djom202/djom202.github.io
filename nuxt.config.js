@@ -111,6 +111,13 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: { exclude: ["fsevents"] },
   },
+  runtimeConfig: {
+    // Public contact endpoint (Cloudflare Worker). Empty in local dev
+    // until the worker URL is configured.
+    public: {
+      contactApiUrl: process.env.CONTACT_API_URL || "",
+    },
+  },
   nitro: {
     preset: "github-pages",
   },
