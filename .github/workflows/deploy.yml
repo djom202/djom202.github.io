@@ -28,6 +28,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate env
+        run: npm run validate
+        env:
+          BASEURL: /
+          REGION: us
+          ACCESSTOKEN: ${{ secrets.ACCESSTOKEN }}
+          CONTACT_API_URL: ${{ vars.CONTACT_API_URL }}
+
       - name: Generate static site
         run: npm run generate
         env:
