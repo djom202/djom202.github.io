@@ -35,10 +35,6 @@ jobs:
           BASEURL: /
           REGION: us
           ACCESSTOKEN: ${{ secrets.ACCESSTOKEN }}
-          SMPT_MESSAGE_TO: ${{ secrets.SMPT_MESSAGE_TO }}
-          SMPT_HOST: ${{ secrets.SMPT_HOST }}
-          SMPT_PORT: ${{ secrets.SMPT_PORT }}
-          SMPT_PASSWORD: ${{ secrets.SMPT_PASSWORD }}
           CONTACT_API_URL: ${{ vars.CONTACT_API_URL }}
 
       - name: Deploy to gh-pages

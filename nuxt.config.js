@@ -85,22 +85,6 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
-    [
-      "nuxt-mail",
-      {
-        message: {
-          to: process.env.SMPT_MESSAGE_TO || "",
-        },
-        smtp: {
-          host: process.env.SMPT_HOST || "localhost",
-          port: Number(process.env.SMPT_PORT) || 1025,
-          auth: {
-            user: process.env.SMPT_MESSAGE_TO || "",
-            pass: process.env.SMPT_PASSWORD || "",
-          },
-        },
-      },
-    ],
   ],
   robots: {
     rules: {
